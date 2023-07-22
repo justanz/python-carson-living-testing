@@ -109,8 +109,6 @@ class CarsonAuth(object):
                 algorithms=["HS256"],  # The algorithm used for signature verification.
                 options={
                     "verify_signature": False,  # This is equivalent to the old `verify=False` option.
-                    "require": ["exp", "iat"],  # This requires the "exp" (expiration time) and "iat" (issued at) claims to be present in the JWT.
-                    # Add or remove options as needed.
                 }
             )
 
