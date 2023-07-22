@@ -103,7 +103,7 @@ class CarsonAuth(object):
             self._token_expiration_time = None
             return
         try:
-            self._token_payload = jwt.decode(token, algorithms=["HS256"], verify=False)
+            self._token_payload = jwt.decode(token, key=public_key, algorithms=["ES256"])
             self._token_expiration_time = self._token_payload.get('exp')
 
             self._token = token
