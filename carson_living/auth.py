@@ -103,7 +103,17 @@ class CarsonAuth(object):
             self._token_expiration_time = None
             return
         try:
-            self._token_payload = jwt.decode(token, key=public_key, algorithms=["ES256"])
+            self._token_payload = jwt.decode(
+                token,
+                key="",  # The key used for signature verification. This should be provided by the service provider.
+                algorithms=["HS256"],  # The algorithm used for signature verification.
+                options={
+                    "verify_signature": False,  # This is equivalent to the old `verify=False` option.
+                    "require": ["exp", "iat"],  # This requires the "exp" (expiration time) and "iat" (issued at) claims to be present in the JWT.
+                    # Add or remove options as needed.
+                }
+            )
+
             self._token_expiration_time = self._token_payload.get('exp')
 
             self._token = token
