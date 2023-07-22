@@ -12,8 +12,8 @@ def readme():
 
 
 setup(
-    name='carson_living_testing',
-    packages=['carson_living_testing'],
+    name='c_l_testing',
+    packages=['c_l_testing'],
     version=_VERSION,
     description='A Python library to communicate with'
                 ' Carson Living Residences (https://www.carson.live/)',
@@ -27,9 +27,6 @@ setup(
     install_requires=['requests', 'pyjwt'],
     test_suite='tests',
     keywords=[
-        'carson living',
-        'virtual doorman',
-        'home automation',
         ],
     classifiers=[
         'Environment :: Other Environment',
