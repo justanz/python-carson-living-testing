@@ -13,7 +13,7 @@ def readme():
 
 setup(
     name='c_l_testing',
-    packages=['c_l_testing'],
+    packages=['carson_living'],
     version=_VERSION,
     description='A Python library to communicate with'
                 ' Carson Living Residences (https://www.carson.live/)',
