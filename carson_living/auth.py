@@ -53,7 +53,55 @@ class CarsonAuth(object):
         # Set token updater after initial token (so it does not fire)
         self._token_update_cb = token_update_cb
 
+    
+import time
+import threading
+
+class CarsonAuth:
+
+    def __init__(self, ...):  # existing parameters
+        # ... existing initializations ...
+
+        # Add an attribute for the refresh timer
+        self._refresh_timer = None
+
+    def authenticated_query(self, ...):  # existing parameters
+        # ... existing method body ...
+
+    def _schedule_token_refresh(self):
+        # Ensure any existing timer is canceled
+        if self._refresh_timer:
+            self._refresh_timer.cancel()
+
+        # Determine the time left before token expiration
+        time_left = self._token_expiration_time - time.time() - 300  # 300 seconds (5 minutes) buffer
+
+        # Schedule the token refresh
+        if time_left > 0:
+            self._refresh_timer = threading.Timer(time_left, self._proactive_token_refresh)
+            self._refresh_timer.start()
+
+    def _proactive_token_refresh(self):
+        # Clear the current token
+        self._token = None
+        # Attempt to get a new token (this will also re-schedule the next refresh)
+        _ = self.token
+
     @property
+    def token(self):
+        if self._valid_token:
+            return self._token
+
+        # ... Existing token fetching logic ...
+
+        # Schedule the proactive token refresh after fetching a new token
+        self._schedule_token_refresh()
+
+        return self._token
+
+    # ... Rest of the class ...
+
+@property
     def username(self):
         """Username
 
@@ -103,15 +151,7 @@ class CarsonAuth(object):
             self._token_expiration_time = None
             return
         try:
-            self._token_payload = jwt.decode(
-                token,
-                key="",  # The key used for signature verification. This should be provided by the service provider.
-                algorithms=["HS256"],  # The algorithm used for signature verification.
-                options={
-                    "verify_signature": False,  # This is equivalent to the old `verify=False` option.
-                }
-            )
-
+            self._token_payload = jwt.decode(token, verify=False)
             self._token_expiration_time = self._token_payload.get('exp')
 
             self._token = token
