@@ -78,3 +78,10 @@ class Carson(CarsonAuth):
             lambda p: CarsonBuilding(
                 self,
                 p))
+
+    def get_rtsp_url(self, camera_id):
+        """Retrieve the RTSP URL for the camera."""
+        url = f"{C_API_URI}/media/cameras/{camera_id}/streams?A={self._token}"
+        response = self.authenticated_query(url)
+        # Extracting the 'rtsp' URL from the response.
+        return response.get("data", {}).get("rtsp")

@@ -1,3 +1,27 @@
+Metadata-Version: 2.1
+Name: c_l_testing
+Version: 2.1.3
+Summary: A Python library to communicate with Carson Living Residences (https://www.carson.live/)
+Home-page: https://github.com/justanz/python-carson-living-testing
+Author: Martin Riedel
+Author-email: web@riedel-it.de
+License: Apache License 2.0
+Classifier: Environment :: Other Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Home Automation
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
+License-File: LICENSE
+
 ========================
 Carson Living Python API
 ========================
